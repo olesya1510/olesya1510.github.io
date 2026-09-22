@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ФитБаланс — план питания и контроль калорий." />
+  <title>ФитБаланс — план питания</title>
+  <style>
+    :root {
+      --bg: #101821;
+      --panel: #192532;
+      --panel-soft: #202f3d;
+      --line: rgba(255,255,255,.09);
+      --text: #f4f8fb;
+      --muted: #91a5b5;
+      --blue: #57b8ff;
+      --green: #65e36d;
+      --yellow: #ffc24b;
+      --orange: #f39a38;
+      --sidebar: 238px;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-width: 320px; background: var(--bg); color: var(--text); font-family: Inter, Arial, sans-serif; }
+    body { min-height: 100vh; }
+    button { border: 0; color: inherit; font: inherit; cursor: pointer; }
+    .app { display: grid; grid-template-columns: var(--sidebar) 1fr; min-height: 100vh; }
+    .sidebar { display: flex; flex-direction: column; border-right: 1px solid var(--line); background: #142230; }
+    .brand { display: flex; align-items: center; gap: 11px; padding: 28px 22px 31px; font-weight: 800; font-size: 20px; }
+    .brand-mark { display: grid; width: 42px; height: 42px; place-items: center; border-radius: 13px; color: #10221a; background: var(--green); font-size: 22px; }
+    .nav { display: grid; gap: 7px; padding: 0 12px; }
+    .nav button { display: flex; align-items: center; gap: 13px; padding: 13px 15px; border-radius: 10px; color: var(--muted); background: transparent; text-align: left; }
+    .nav button:hover, .nav button.active { color: var(--text); background: #2d465e; }
+    .nav-icon { width: 21px; color: var(--blue); font-size: 19px; text-align: center; }
+    .sidebar-bottom { margin-top: auto; padding: 22px; color: var(--muted); font-size: 12px; }
+    .sidebar-bottom p { margin: 10px 0; }
+    .main { min-width: 0; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; min-height: 73px; padding: 0 30px; border-bottom: 1px solid var(--line); }
+    .page-title { display: flex; align-items: center; gap: 13px; }
+    .page-title h1 { margin: 0; font-size: 19px; }
+    .page-title p { margin: 2px 0 0; color: var(--muted); font-size: 12px; }
+    .top-actions { display: flex; gap: 10px; }
+    .icon-button { display: grid; width: 38px; height: 38px; place-items: center; border-radius: 10px; background: var(--panel-soft); }
+    .avatar { display: grid; width: 38px; height: 38px; place-items: center; border-radius: 50%; background: #425873; }
+    .content { max-width: 1170px; margin: 0 auto; padding: 29px 30px 55px; }
+    .tabs { display: flex; gap: 3px; margin-bottom: 9px; padding: 3px; border-radius: 10px; background: #0c141c; }
+    .tabs button { flex: 1; padding: 10px; border-radius: 8px; color: var(--muted); background: transparent; font-size: 13px; font-weight: 700; }
+    .tabs button.active { color: var(--text); background: #344352; }
+    .panel { padding: 25px; border: 1px solid var(--line); border-radius: 16px; background: var(--panel); }
+    .calorie-header { display: flex; align-items: center; justify-content: center; gap: 22px; padding: 8px 0 22px; }
+    .calorie-control { display: grid; width: 43px; height: 43px; place-items: center; border-radius: 11px; background: var(--panel-soft); color: var(--blue); font-size: 22px; }
+    .calorie-ring { display: grid; width: 150px; height: 150px; place-items: center; border: 8px solid var(--green); border-radius: 50%; box-shadow: 0 0 24px rgba(101,227,109,.25), inset 0 0 23px rgba(101,227,109,.12); text-align: center; }
+    .calorie-ring strong { display: block; font-size: 31px; line-height: 1; }
+    .calorie-ring span { color: var(--green); font-size: 11px; font-weight: 700; }
+    .range { width: min(100%, 290px); height: 5px; margin: 0 auto 25px; border-radius: 5px; background: linear-gradient(90deg, var(--green) 0 38%, #334653 38%); }
+    .goals { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 27px; }
+    .goal { min-height: 80px; padding: 13px; border: 1px solid var(--line); border-radius: 11px; background: #1c2a37; text-align: left; }
+    .goal.active { border-color: var(--blue); background: #203c58; }
+    .goal strong { display: block; margin-bottom: 4px; font-size: 13px; }
+    .goal span { color: var(--muted); font-size: 11px; }
+    .macro-area { display: grid; grid-template-columns: 220px 1fr; align-items: center; gap: 42px; padding: 24px 7px 10px; border-top: 1px solid var(--line); }
+    .macro-ring { display: grid; width: 180px; height: 180px; place-items: center; border: 18px solid var(--orange); border-right-color: var(--green); border-bottom-color: var(--yellow); border-radius: 50%; box-shadow: 0 0 22px rgba(243,154,56,.15); }
+    .macro-ring strong { font-size: 25px; }
+    .macro-ring span { color: var(--muted); font-size: 11px; }
+    .macro-list { display: grid; gap: 20px; }
+    .macro-row { display: grid; grid-template-columns: 10px 1fr auto; align-items: center; gap: 10px; }
+    .macro-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--orange); }
+    .macro-row:nth-child(2) .macro-dot { background: var(--green); }
+    .macro-row:nth-child(3) .macro-dot { background: var(--yellow); }
+    .macro-label strong { display: block; font-size: 13px; }
+    .macro-label span, .macro-value { color: var(--muted); font-size: 12px; }
+    .macro-adjust { display: flex; gap: 6px; }
+    .macro-adjust button { width: 28px; height: 28px; border-radius: 8px; background: var(--panel-soft); color: var(--blue); }
+    .save { width: 100%; margin-top: 25px; padding: 13px; border-radius: 10px; background: #2869a5; font-weight: 700; }
+    .save:hover { background: #367fbe; }
+    .placeholder { display: none; padding: 55px 20px; text-align: center; }
+    .placeholder.show { display: block; }
+    .placeholder h2 { margin: 0 0 8px; }
+    .placeholder p { margin: 0; color: var(--muted); }
+    .toast { position: fixed; right: 24px; bottom: 24px; display: none; padding: 14px 18px; border-radius: 10px; background: var(--green); color: #10221a; font-weight: 700; }
+    .toast.show { display: block; }
+    @media (max-width: 800px) {
+      :root { --sidebar: 74px; }
+      .brand { justify-content: center; padding: 20px 10px; }
+      .brand span:last-child, .nav button span:last-child, .sidebar-bottom { display: none; }
+      .nav button { justify-content: center; padding: 13px 8px; }
+      .topbar { padding: 0 18px; }
+      .content { padding: 20px 15px 40px; }
+      .macro-area { grid-template-columns: 1fr; justify-items: center; gap: 24px; }
+      .macro-list { width: 100%; }
+    }
+    @media (max-width: 560px) {
+      .goals { grid-template-columns: repeat(2, 1fr); }
+      .calorie-header { gap: 10px; }
+      .calorie-ring { width: 126px; height: 126px; }
+      .panel { padding: 16px; }
+      .page-title p { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">Ф</span><span>ФитБаланс</span></div>
+      <nav class="nav" aria-label="Главное меню">
+        <button class="active" data-view="plan"><span class="nav-icon">▣</span><span>План</span></button>
+        <button data-view="diary"><span class="nav-icon">+</span><span>Дневник</span></button>
+        <button data-view="progress"><span class="nav-icon">◔</span><span>Прогресс</span></button>
+        <button data-view="knowledge"><span class="nav-icon">▤</span><span>База знаний</span></button>
+        <button data-view="community"><span class="nav-icon">◌</span><span>Сообщество</span></button>
+      </nav>
+      <div class="sidebar-bottom"><p>Политика и условия</p><p>Помощь</p><p>© 2026 ФитБаланс</p></div>
+    </aside>
+    <main class="main">
+      <header class="topbar">
+        <div class="page-title"><span class="nav-icon">▣</span><div><h1 id="view-title">План</h1><p id="view-subtitle">Настройте цель питания</p></div></div>
+        <div class="top-actions"><button class="icon-button" aria-label="Уведомления">♧</button><button class="avatar" aria-label="Профиль">О</button></div>
+      </header>
+      <div class="content">
+        <div class="tabs" role="tablist"><button class="active" data-goal="loss">Похудение</button><button data-goal="balance">Сбалансированное питание</button><button data-goal="sport">Спортивное питание</button><button data-goal="lowcarb">Низкоуглеводный рацион</button></div>
+        <section class="panel" id="plan-view">
+          <div class="calorie-header"><button class="calorie-control" id="minus" aria-label="Уменьшить калории">−</button><div class="calorie-ring"><div><strong id="calories">1800</strong><span>ккал в день</span></div></div><button class="calorie-control" id="plus" aria-label="Увеличить калории">+</button></div>
+          <div class="range" aria-hidden="true"></div>
+          <div class="goals"><button class="goal active"><strong>Рекомендуем для похудения</strong><span>Больше белка, контроль калорий</span></button><button class="goal"><strong>Сбалансированное питание</strong><span>Равномерное распределение БЖУ</span></button><button class="goal"><strong>Средиземноморский стиль</strong><span>Больше полезных жиров</span></button><button class="goal"><strong>Высокобелковый</strong><span>Упор на сытость и сохранение мышц</span></button></div>
+          <div class="macro-area"><div class="macro-ring"><div><strong id="macro-percent">69%</strong><span>БЖУ</span></div></div><div class="macro-list"><div class="macro-row"><i class="macro-dot"></i><div class="macro-label"><strong>Белки</strong><span>25.7%</span></div><span class="macro-value" id="protein">120 г</span><div class="macro-adjust"><button data-macro="protein" data-step="-5">−</button><button data-macro="protein" data-step="5">+</button></div></div><div class="macro-row"><i class="macro-dot"></i><div class="macro-label"><strong>Жиры</strong><span>31.4%</span></div><span class="macro-value" id="fats">65 г</span><div class="macro-adjust"><button data-macro="fats" data-step="-5">−</button><button data-macro="fats" data-step="5">+</button></div></div><div class="macro-row"><i class="macro-dot"></i><div class="macro-label"><strong>Углеводы</strong><span>42.9%</span></div><span class="macro-value" id="carbs">200 г</span><div class="macro-adjust"><button data-macro="carbs" data-step="-5">−</button><button data-macro="carbs" data-step="5">+</button></div></div></div></div>
+          <button class="save" id="save">Сохранить план</button>
+        </section>
+        <section class="panel placeholder" data-placeholder="diary"><h2>Дневник питания</h2><p>Здесь будут ваши приёмы пищи, продукты и дневной итог.</p></section>
+        <section class="panel placeholder" data-placeholder="progress"><h2>Мой прогресс</h2><p>Здесь появятся графики веса, калорий и соблюдения плана.</p></section>
+        <section class="panel placeholder" data-placeholder="knowledge"><h2>База знаний</h2><p>Полезные статьи о питании, привычках и восстановлении.</p></section>
+        <section class="panel placeholder" data-placeholder="community"><h2>Сообщество</h2><p>Общение, поддержка и обмен результатами.</p></section>
+      </div>
+    </main>
+  </div>
+  <div class="toast" id="toast">План сохранён</div>
+  <script>
+    const state = { calories: 1800, protein: 120, fats: 65, carbs: 200 };
+    const titles = { plan: ['План', 'Настройте цель питания'], diary: ['Дневник', 'Добавляйте приёмы пищи'], progress: ['Прогресс', 'Следите за результатами'], knowledge: ['База знаний', 'Полезные материалы о питании'], community: ['Сообщество', 'Поддержка и общение'] };
+    const $ = (id) => document.getElementById(id);
+    function render() { $('calories').textContent = state.calories; $('protein').textContent = state.protein + ' г'; $('fats').textContent = state.fats + ' г'; $('carbs').textContent = state.carbs + ' г'; }
+    document.querySelectorAll('[data-view]').forEach((button) => button.addEventListener('click', () => { document.querySelectorAll('[data-view]').forEach((item) => item.classList.remove('active')); button.classList.add('active'); const key = button.dataset.view; $('view-title').textContent = titles[key][0]; $('view-subtitle').textContent = titles[key][1]; $('plan-view').style.display = key === 'plan' ? 'block' : 'none'; document.querySelectorAll('[data-placeholder]').forEach((item) => item.classList.toggle('show', item.dataset.placeholder === key)); }));
+    $('minus').addEventListener('click', () => { state.calories = Math.max(1000, state.calories - 50); render(); });
+    $('plus').addEventListener('click', () => { state.calories += 50; render(); });
+    document.querySelectorAll('[data-macro]').forEach((button) => button.addEventListener('click', () => { const key = button.dataset.macro; state[key] = Math.max(0, state[key] + Number(button.dataset.step)); render(); }));
+    document.querySelectorAll('[data-goal]').forEach((button) => button.addEventListener('click', () => { document.querySelectorAll('[data-goal]').forEach((item) => item.classList.remove('active')); button.classList.add('active'); }));
+    document.querySelectorAll('.goal').forEach((button) => button.addEventListener('click', () => { document.querySelectorAll('.goal').forEach((item) => item.classList.remove('active')); button.classList.add('active'); }));
+    $('save').addEventListener('click', () => { $('toast').classList.add('show'); setTimeout(() => $('toast').classList.remove('show'), 1800); });
+    render();
+  </script>
+</body>
+</html>
