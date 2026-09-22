@@ -102,27 +102,27 @@
     <aside class="sidebar">
       <div class="brand"><span class="brand-mark">Ф</span><span>ФитБаланс</span></div>
       <nav class="nav" aria-label="Главное меню">
-        <button class="active" data-view="plan"><span class="nav-icon">▣</span><span>План</span></button>
-        <button data-view="diary"><span class="nav-icon">+</span><span>Дневник</span></button>
-        <button data-view="progress"><span class="nav-icon">◔</span><span>Прогресс</span></button>
-        <button data-view="knowledge"><span class="nav-icon">▤</span><span>База знаний</span></button>
-        <button data-view="community"><span class="nav-icon">◌</span><span>Сообщество</span></button>
+        <button type="button" class="active" data-view="plan"><span class="nav-icon">▣</span><span>План</span></button>
+        <button type="button" data-view="diary"><span class="nav-icon">+</span><span>Дневник</span></button>
+        <button type="button" data-view="progress"><span class="nav-icon">◔</span><span>Прогресс</span></button>
+        <button type="button" data-view="knowledge"><span class="nav-icon">▤</span><span>База знаний</span></button>
+        <button type="button" data-view="community"><span class="nav-icon">◌</span><span>Сообщество</span></button>
       </nav>
       <div class="sidebar-bottom"><p>Политика и условия</p><p>Помощь</p><p>© 2026 ФитБаланс</p></div>
     </aside>
     <main class="main">
       <header class="topbar">
         <div class="page-title"><span class="nav-icon">▣</span><div><h1 id="view-title">План</h1><p id="view-subtitle">Настройте цель питания</p></div></div>
-        <div class="top-actions"><button class="icon-button" aria-label="Уведомления">♧</button><button class="avatar" aria-label="Профиль">О</button></div>
+        <div class="top-actions"><button type="button" class="icon-button" id="notifications" aria-label="Уведомления">♧</button><button type="button" class="avatar" id="profile" aria-label="Профиль">О</button></div>
       </header>
       <div class="content">
-        <div class="tabs" role="tablist"><button class="active" data-goal="loss">Похудение</button><button data-goal="balance">Сбалансированное питание</button><button data-goal="sport">Спортивное питание</button><button data-goal="lowcarb">Низкоуглеводный рацион</button></div>
+        <div class="tabs" role="tablist"><button type="button" class="active" data-goal="loss">Похудение</button><button type="button" data-goal="balance">Сбалансированное питание</button><button type="button" data-goal="sport">Спортивное питание</button><button type="button" data-goal="lowcarb">Низкоуглеводный рацион</button></div>
         <section class="panel" id="plan-view">
-          <div class="calorie-header"><button class="calorie-control" id="minus" aria-label="Уменьшить калории">−</button><div class="calorie-ring"><div><strong id="calories">1800</strong><span>ккал в день</span></div></div><button class="calorie-control" id="plus" aria-label="Увеличить калории">+</button></div>
+          <div class="calorie-header"><button type="button" class="calorie-control" id="minus" aria-label="Уменьшить калории">−</button><div class="calorie-ring"><div><strong id="calories">1800</strong><span>ккал в день</span></div></div><button type="button" class="calorie-control" id="plus" aria-label="Увеличить калории">+</button></div>
           <div class="range" aria-hidden="true"></div>
-          <div class="goals"><button class="goal active"><strong>Рекомендуем для похудения</strong><span>Больше белка, контроль калорий</span></button><button class="goal"><strong>Сбалансированное питание</strong><span>Равномерное распределение БЖУ</span></button><button class="goal"><strong>Средиземноморский стиль</strong><span>Больше полезных жиров</span></button><button class="goal"><strong>Высокобелковый</strong><span>Упор на сытость и сохранение мышц</span></button></div>
+          <div class="goals"><button type="button" class="goal active"><strong>Рекомендуем для похудения</strong><span>Больше белка, контроль калорий</span></button><button type="button" class="goal"><strong>Сбалансированное питание</strong><span>Равномерное распределение БЖУ</span></button><button type="button" class="goal"><strong>Средиземноморский стиль</strong><span>Больше полезных жиров</span></button><button type="button" class="goal"><strong>Высокобелковый</strong><span>Упор на сытость и сохранение мышц</span></button></div>
           <div class="macro-area"><div class="macro-ring"><div><strong id="macro-percent">69%</strong><span>БЖУ</span></div></div><div class="macro-list"><div class="macro-row"><i class="macro-dot"></i><div class="macro-label"><strong>Белки</strong><span>25.7%</span></div><span class="macro-value" id="protein">120 г</span><div class="macro-adjust"><button data-macro="protein" data-step="-5">−</button><button data-macro="protein" data-step="5">+</button></div></div><div class="macro-row"><i class="macro-dot"></i><div class="macro-label"><strong>Жиры</strong><span>31.4%</span></div><span class="macro-value" id="fats">65 г</span><div class="macro-adjust"><button data-macro="fats" data-step="-5">−</button><button data-macro="fats" data-step="5">+</button></div></div><div class="macro-row"><i class="macro-dot"></i><div class="macro-label"><strong>Углеводы</strong><span>42.9%</span></div><span class="macro-value" id="carbs">200 г</span><div class="macro-adjust"><button data-macro="carbs" data-step="-5">−</button><button data-macro="carbs" data-step="5">+</button></div></div></div></div>
-          <button class="save" id="save">Сохранить план</button>
+          <button type="button" class="save" id="save">Сохранить план</button>
         </section>
         <section class="panel placeholder" data-placeholder="diary"><h2>Дневник питания</h2><p>Здесь будут ваши приёмы пищи, продукты и дневной итог.</p></section>
         <section class="panel placeholder" data-placeholder="progress"><h2>Мой прогресс</h2><p>Здесь появятся графики веса, калорий и соблюдения плана.</p></section>
@@ -137,13 +137,21 @@
     const titles = { plan: ['План', 'Настройте цель питания'], diary: ['Дневник', 'Добавляйте приёмы пищи'], progress: ['Прогресс', 'Следите за результатами'], knowledge: ['База знаний', 'Полезные материалы о питании'], community: ['Сообщество', 'Поддержка и общение'] };
     const $ = (id) => document.getElementById(id);
     function render() { $('calories').textContent = state.calories; $('protein').textContent = state.protein + ' г'; $('fats').textContent = state.fats + ' г'; $('carbs').textContent = state.carbs + ' г'; }
-    document.querySelectorAll('[data-view]').forEach((button) => button.addEventListener('click', () => { document.querySelectorAll('[data-view]').forEach((item) => item.classList.remove('active')); button.classList.add('active'); const key = button.dataset.view; $('view-title').textContent = titles[key][0]; $('view-subtitle').textContent = titles[key][1]; $('plan-view').style.display = key === 'plan' ? 'block' : 'none'; document.querySelectorAll('[data-placeholder]').forEach((item) => item.classList.toggle('show', item.dataset.placeholder === key)); }));
-    $('minus').addEventListener('click', () => { state.calories = Math.max(1000, state.calories - 50); render(); });
-    $('plus').addEventListener('click', () => { state.calories += 50; render(); });
-    document.querySelectorAll('[data-macro]').forEach((button) => button.addEventListener('click', () => { const key = button.dataset.macro; state[key] = Math.max(0, state[key] + Number(button.dataset.step)); render(); }));
-    document.querySelectorAll('[data-goal]').forEach((button) => button.addEventListener('click', () => { document.querySelectorAll('[data-goal]').forEach((item) => item.classList.remove('active')); button.classList.add('active'); }));
-    document.querySelectorAll('.goal').forEach((button) => button.addEventListener('click', () => { document.querySelectorAll('.goal').forEach((item) => item.classList.remove('active')); button.classList.add('active'); }));
-    $('save').addEventListener('click', () => { $('toast').classList.add('show'); setTimeout(() => $('toast').classList.remove('show'), 1800); });
+    function showToast(message) { $('toast').textContent = message; $('toast').classList.add('show'); setTimeout(() => $('toast').classList.remove('show'), 1800); }
+    function selectView(key) { document.querySelectorAll('[data-view]').forEach((item) => item.classList.toggle('active', item.dataset.view === key)); $('view-title').textContent = titles[key][0]; $('view-subtitle').textContent = titles[key][1]; $('plan-view').style.display = key === 'plan' ? 'block' : 'none'; document.querySelectorAll('[data-placeholder]').forEach((item) => item.classList.toggle('show', item.dataset.placeholder === key)); }
+    document.addEventListener('click', (event) => {
+      const target = event.target.closest('button');
+      if (!target) return;
+      if (target.dataset.view) selectView(target.dataset.view);
+      if (target.dataset.goal) { document.querySelectorAll('[data-goal]').forEach((item) => item.classList.toggle('active', item === target)); showToast('Цель обновлена'); }
+      if (target.classList.contains('goal')) { document.querySelectorAll('.goal').forEach((item) => item.classList.toggle('active', item === target)); showToast('Распределение БЖУ обновлено'); }
+      if (target.id === 'minus') { state.calories = Math.max(1000, state.calories - 50); render(); }
+      if (target.id === 'plus') { state.calories += 50; render(); }
+      if (target.dataset.macro) { const key = target.dataset.macro; state[key] = Math.max(0, state[key] + Number(target.dataset.step)); render(); }
+      if (target.id === 'save') showToast('План сохранён');
+      if (target.id === 'notifications') showToast('Новых уведомлений нет');
+      if (target.id === 'profile') showToast('Профиль пользователя');
+    });
     render();
   </script>
 </body>
