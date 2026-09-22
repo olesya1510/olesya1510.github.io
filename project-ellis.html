@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ellis — Olesya Dëkhand</title>
+  <style>
+    :root {
+      --bg: #080b12;
+      --bg-soft: #0e131d;
+      --card: rgba(20, 27, 40, 0.72);
+      --text: #f4f7fb;
+      --muted: #99a6b8;
+      --line: rgba(255,255,255,0.1);
+      --cyan: #57e6ff;
+      --violet: #a579ff;
+      --green: #55efbd;
+      --gradient: linear-gradient(135deg, var(--cyan), var(--violet));
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      font-family: Inter, Arial, sans-serif;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(87, 230, 255, 0.11), transparent 28rem),
+        radial-gradient(circle at 90% 12%, rgba(165, 121, 255, 0.13), transparent 30rem),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1100px, calc(100% - 40px)); margin: 0 auto; }
+    .header {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(8,11,18,0.72); backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; }
+    .logo-mark {
+      display: grid; place-items: center;
+      width: 36px; height: 36px; border-radius: 11px;
+      background: var(--gradient); color: #071017; font-size: 14px; font-weight: 800;
+    }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 11px 17px; border-radius: 12px; background: var(--gradient);
+      color: #061016; font-weight: 700;
+    }
+    main {
+      padding: 60px 0 80px;
+    }
+    .hero {
+      padding: 40px 0 28px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: var(--card);
+    }
+    .pill {
+      display: inline-block; padding: 8px 12px; border: 1px solid rgba(87,230,255,0.25);
+      border-radius: 8px; color: var(--cyan); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    h1 {
+      font-size: clamp(34px, 5vw, 64px);
+      letter-spacing: -0.06em;
+      margin-bottom: 16px;
+    }
+    .lead {
+      max-width: 760px; color: var(--muted); font-size: 18px; margin-bottom: 28px;
+    }
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    .chips span {
+      padding: 8px 10px; border-radius: 8px; background: rgba(255,255,255,0.05); color: #dfeaf7;
+      font-size: 12px; font-family: "JetBrains Mono", monospace;
+    }
+    .grid {
+      margin-top: 28px;
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px;
+    }
+    .card {
+      border: 1px solid var(--line); border-radius: 22px; background: rgba(255,255,255,0.02); padding: 24px;
+    }
+    h2 { font-size: 20px; margin-bottom: 12px; }
+    p, li { color: var(--muted); }
+    ul { margin-left: 18px; }
+    .footer { padding: 32px 0 60px; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container nav">
+      <a href="index.html" class="logo">
+        <span class="logo-mark">ОД</span>
+        <span>Olesya Dëkhand</span>
+      </a>
+      <a class="back-link" href="index.html" target="_self">← Назад</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="container hero">
+      <div class="pill">P2P / Cybersecurity / Patent</div>
+      <h1>Ellis</h1>
+      <p class="lead">
+        Проект способа децентрализованной фильтрации сетевого трафика и защиты веб-ресурсов от автоматизированных атак на основе DAG репутаций узлов.
+      </p>
+
+      <div class="chips">
+        <span>Ed25519</span>
+        <span>Shuffling</span>
+        <span>Gossip</span>
+        <span>DHP-Score</span>
+        <span>DAG</span>
+        <span>P2P</span>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h2>Что это</h2>
+          <p>
+            Ellis — распределённая система верификации пользовательской активности, которая переносит фильтрацию входящих сессий на оконечные устройства сети и защищает веб-ресурсы от ботов, DDoS- и Sybil-атак.
+          </p>
+        </div>
+        <div class="card">
+          <h2>Задача</h2>
+          <p>
+            Снизить нагрузку на целевой сервер и каналы связи, сохранив приватность пользователей и устойчивость проверки к сговору или массовому созданию бот-узлов.
+          </p>
+        </div>
+        <div class="card">
+          <h2>Что было сделано</h2>
+          <ul>
+            <li>подпись запросов асимметричным ключом Ed25519</li>
+            <li>назначение узлов-валидаторов через случайную выборку Shuffling</li>
+            <li>распространение верификационных пакетов по Gossip-протоколу</li>
+            <li>расчёт DHP-Score и фиксация истории взаимодействий в DAG</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h2>Результат</h2>
+          <p>
+            Сформирована архитектура децентрализованной защиты, где допуск запроса определяется динамической репутацией проверяющих узлов без раскрытия персональных данных пользователей.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="container footer">
+    <a href="index.html">← Вернуться на главную</a>
+  </footer>
+</body>
+</html>

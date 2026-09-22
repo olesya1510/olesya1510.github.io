@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Портфолио Олеси Дэханд — бизнес-аналитик и backend developer." />
+  <title>Олеся Дэханд — Business Analyst & Backend Developer</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #080b12;
+      --bg-soft: #0e131d;
+      --card: rgba(20, 27, 40, 0.72);
+      --card-hover: rgba(29, 39, 57, 0.9);
+      --text: #f4f7fb;
+      --muted: #99a6b8;
+      --line: rgba(255, 255, 255, 0.1);
+      --cyan: #57e6ff;
+      --violet: #a579ff;
+      --green: #55efbd;
+      --gradient: linear-gradient(135deg, var(--cyan), var(--violet));
+      --radius: 24px;
+      --container: 1160px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-width: 320px;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(87, 230, 255, 0.11), transparent 28rem),
+        radial-gradient(circle at 90% 12%, rgba(165, 121, 255, 0.13), transparent 30rem),
+        var(--bg);
+      font-family: "Inter", sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      position: fixed;
+      z-index: -1;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 54px 54px;
+      mask-image: linear-gradient(to bottom, black, transparent 85%);
+      content: "";
+      pointer-events: none;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(var(--container), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .header {
+      position: fixed;
+      z-index: 10;
+      top: 0;
+      right: 0;
+      left: 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      background: rgba(8, 11, 18, 0.72);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 76px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .logo-mark {
+      display: grid;
+      width: 36px;
+      height: 36px;
+      place-items: center;
+      border: 1px solid rgba(87, 230, 255, 0.4);
+      border-radius: 11px;
+      color: #071017;
+      background: var(--gradient);
+      box-shadow: 0 0 24px rgba(87, 230, 255, 0.23);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      transition: color 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-button,
+    .primary-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: 0;
+      border-radius: 12px;
+      color: #061016;
+      background: var(--gradient);
+      box-shadow: 0 12px 30px rgba(87, 230, 255, 0.16);
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .nav-button {
+      padding: 11px 17px;
+      font-size: 13px;
+    }
+
+    .primary-button {
+      padding: 16px 23px;
+      font-size: 15px;
+    }
+
+    .nav-button:hover,
+    .primary-button:hover {
+      box-shadow: 0 16px 38px rgba(165, 121, 255, 0.28);
+      transform: translateY(-3px);
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 64px;
+      min-height: 760px;
+      padding-top: 120px;
+    }
+
+    .hero-content {
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 23px;
+      color: var(--cyan);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 30px;
+      height: 1px;
+      background: var(--cyan);
+      content: "";
+      box-shadow: 0 0 12px var(--cyan);
+    }
+
+    h1 {
+      max-width: 800px;
+      margin-bottom: 26px;
+      font-size: clamp(45px, 7vw, 86px);
+      line-height: 1.03;
+      letter-spacing: -0.07em;
+    }
+
+    h1 span {
+      display: block;
+      color: transparent;
+      background: var(--gradient);
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+
+    .hero-description {
+      max-width: 620px;
+      margin-bottom: 35px;
+      color: var(--muted);
+      font-size: clamp(16px, 2vw, 19px);
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .secondary-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 21px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: var(--text);
+      font-weight: 600;
+      transition: 0.25s ease;
+    }
+
+    .secondary-button:hover {
+      border-color: rgba(87, 230, 255, 0.5);
+      background: rgba(87, 230, 255, 0.08);
+      transform: translateY(-3px);
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 405px;
+      animation: fadeIn 1s ease 0.15s both;
+    }
+
+    .orb {
+      position: absolute;
+      top: 17%;
+      right: 12%;
+      width: 270px;
+      height: 270px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(87, 230, 255, 0.75), rgba(165, 121, 255, 0.6));
+      filter: blur(2px);
+      opacity: 0.8;
+      box-shadow:
+        0 0 70px rgba(87, 230, 255, 0.25),
+        0 0 130px rgba(165, 121, 255, 0.2);
+      animation: float 7s ease-in-out infinite;
+    }
+
+    .orb::after {
+      position: absolute;
+      inset: 18px;
+      border-radius: 50%;
+      background: #101724;
+      content: "";
+    }
+
+    .code-card {
+      position: absolute;
+      z-index: 1;
+      right: 0;
+      bottom: 0;
+      width: min(100%, 420px);
+      padding: 25px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(14, 19, 29, 0.78);
+      box-shadow: 0 24px 70px rgba(0,0,0,0.32);
+      backdrop-filter: blur(18px);
+      transform: rotate(3deg);
+      transition: transform 0.4s ease;
+    }
+
+    .code-card:hover {
+      transform: rotate(0deg) translateY(-8px);
+    }
+
+    .window-dots {
+      display: flex;
+      gap: 7px;
+      margin-bottom: 24px;
+    }
+
+    .window-dots i {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--cyan);
+    }
+
+    .window-dots i:nth-child(2) { background: #ffd166; }
+    .window-dots i:nth-child(3) { background: #ff6b9d; }
+
+    .code {
+      color: #cbd7e7;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 13px;
+      line-height: 2;
+    }
+
+    .code .purple { color: #bf9bff; }
+    .code .cyan { color: var(--cyan); }
+    .code .green { color: var(--green); }
+    .code .muted { color: #66758a; }
+
+    section {
+      padding: 110px 0;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 30px;
+      margin-bottom: 42px;
+    }
+
+    .section-number {
+      margin-bottom: 13px;
+      color: var(--cyan);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+    }
+
+    h2 {
+      font-size: clamp(31px, 5vw, 54px);
+      line-height: 1.1;
+      letter-spacing: -0.06em;
+    }
+
+    .section-intro {
+      max-width: 390px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-quote {
+      position: relative;
+      padding: 30px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, rgba(87,230,255,0.08), rgba(165,121,255,0.08));
+    }
+
+    .about-quote::before {
+      display: block;
+      margin-bottom: 18px;
+      color: var(--cyan);
+      content: "“";
+      font-size: 70px;
+      line-height: 0.7;
+    }
+
+    .about-quote p {
+      font-size: 21px;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .about-text {
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .about-text p + p {
+      margin-top: 20px;
+    }
+
+    .highlight {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .stack-card,
+    .project-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--card);
+      backdrop-filter: blur(12px);
+      transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+    }
+
+    .stack-card {
+      min-height: 190px;
+      padding: 25px;
+    }
+
+    .stack-card:hover,
+    .project-card:hover {
+      border-color: rgba(87, 230, 255, 0.38);
+      background: var(--card-hover);
+      transform: translateY(-7px);
+    }
+
+    .stack-icon {
+      display: grid;
+      width: 53px;
+      height: 53px;
+      margin-bottom: 25px;
+      place-items: center;
+      border-radius: 15px;
+      color: var(--cyan);
+      background: rgba(87, 230, 255, 0.1);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    .stack-card:nth-child(2) .stack-icon,
+    .stack-card:nth-child(5) .stack-icon {
+      color: var(--violet);
+      background: rgba(165, 121, 255, 0.1);
+    }
+
+    .stack-card h3 {
+      margin-bottom: 5px;
+      font-size: 17px;
+    }
+
+    .stack-card p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .project-card {
+      display: block;
+      position: relative;
+      min-height: 390px;
+      padding: 30px;
+      overflow: hidden;
+      color: inherit;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .project-card::after {
+      position: absolute;
+      right: -90px;
+      bottom: -100px;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: rgba(87,230,255,0.11);
+      filter: blur(28px);
+      content: "";
+      transition: transform 0.4s ease;
+    }
+
+    .project-card:nth-child(2)::after {
+      background: rgba(165,121,255,0.13);
+    }
+
+    .project-card:hover::after {
+      transform: scale(1.35);
+    }
+
+    .project-top {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 86px;
+    }
+
+    .project-tag {
+      padding: 7px 10px;
+      border: 1px solid rgba(87,230,255,0.25);
+      border-radius: 8px;
+      color: var(--cyan);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    .project-arrow {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      font-size: 21px;
+      transition: transform 0.3s ease;
+    }
+
+    .project-card:hover .project-arrow {
+      transform: rotate(45deg);
+    }
+
+    .project-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .project-content h3 {
+      margin-bottom: 10px;
+      font-size: 31px;
+      letter-spacing: -0.04em;
+    }
+
+    .project-content p {
+      max-width: 470px;
+      color: var(--muted);
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 22px;
+    }
+
+    .project-tech span {
+      padding: 6px 10px;
+      border-radius: 7px;
+      color: #bdc9d8;
+      background: rgba(255,255,255,0.07);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .service-card {
+      display: flex;
+      min-height: 190px;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--card);
+      transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+    }
+
+    .service-card:hover {
+      border-color: rgba(87, 230, 255, 0.38);
+      background: var(--card-hover);
+      transform: translateY(-5px);
+    }
+
+    .service-card h3 {
+      max-width: 290px;
+      margin-bottom: 18px;
+      font-size: 17px;
+      line-height: 1.35;
+    }
+
+    .service-meta {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 12px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+
+    .service-price {
+      color: var(--cyan);
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .service-time {
+      color: var(--muted);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      text-align: right;
+    }
+
+    .contact {
+      position: relative;
+      padding-bottom: 135px;
+      text-align: center;
+    }
+
+    .contact-box {
+      position: relative;
+      padding: 75px 30px;
+      overflow: hidden;
+      border: 1px solid rgba(87,230,255,0.2);
+      border-radius: 30px;
+      background:
+        radial-gradient(circle at 50% 100%, rgba(165,121,255,0.18), transparent 40%),
+        linear-gradient(135deg, rgba(87,230,255,0.08), rgba(165,121,255,0.08));
+    }
+
+    .contact-box h2 {
+      max-width: 700px;
+      margin: 0 auto 18px;
+    }
+
+    .contact-box p {
+      max-width: 500px;
+      margin: 0 auto 30px;
+      color: var(--muted);
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 13px 18px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      color: var(--text);
+      font-size: 14px;
+      transition: 0.25s ease;
+    }
+
+    .contact-link:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      transform: translateY(-3px);
+    }
+
+    footer {
+      padding: 25px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-17px) scale(1.03); }
+    }
+
+    @media (max-width: 850px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        padding-top: 145px;
+        padding-bottom: 70px;
+      }
+
+      .hero-visual {
+        min-height: 360px;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      .stack-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: min(var(--container), calc(100% - 28px));
+      }
+
+      section {
+        padding: 75px 0;
+      }
+
+      h1 {
+        font-size: clamp(42px, 13vw, 65px);
+      }
+
+      .section-heading {
+        display: block;
+      }
+
+      .section-intro {
+        margin-top: 18px;
+      }
+
+      .stack-grid,
+      .projects-grid,
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stack-card {
+        min-height: 160px;
+      }
+
+      .project-card {
+        min-height: 360px;
+      }
+
+      .orb {
+        right: 5%;
+        width: 220px;
+        height: 220px;
+      }
+
+      .code-card {
+        padding: 19px;
+      }
+
+      .code {
+        font-size: 11px;
+      }
+
+      .footer-inner {
+        display: block;
+      }
+
+      .footer-inner span + span {
+        display: block;
+        margin-top: 7px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <div class="container nav">
+      <a class="logo" href="#top" aria-label="На главную">
+        <span class="logo-mark">ОД</span>
+        <span>Olesya Dekhand</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Основная навигация">
+        <a href="#about">Обо мне</a>
+        <a href="#stack">Стек</a>
+        <a href="#projects">Проекты</a>
+        <a href="#services">Услуги</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+
+      <a class="nav-button" href="#contacts">
+        Связаться
+      </a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero container">
+      <div class="hero-content">
+        <div class="eyebrow">Business analyst / Backend developer</div>
+
+        <h1>
+          Олеся
+          <span>Дэханд</span>
+        </h1>
+
+        <p class="hero-description">
+          Проектирование архитектуры, автоматизация бизнес-процессов
+          и разработка высоконагруженных систем на Python, Go и Rust.
+        </p>
+
+        <div class="hero-actions">
+          <a class="primary-button" href="#projects">Смотреть проекты <span>↗</span></a>
+          <a class="secondary-button" href="#contacts">Написать мне</a>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="orb"></div>
+
+        <div class="code-card">
+          <div class="window-dots">
+            <i></i><i></i><i></i>
+          </div>
+
+          <div class="code">
+            <div><span class="purple">const</span> developer = {</div>
+            <div>&nbsp;&nbsp;name: <span class="green">"Olesya"</span>,</div>
+            <div>&nbsp;&nbsp;role: <span class="green">"backend"</span>,</div>
+            <div>&nbsp;&nbsp;focus: [</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cyan">"architecture"</span>,</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cyan">"automation"</span>,</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cyan">"P2P systems"</span></div>
+            <div>&nbsp;&nbsp;]</div>
+            <div>};</div>
+            <div class="muted">// build what's next</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <div class="section-number">01 — ABOUT</div>
+            <h2>Смыслы превращаю<br />в работающие системы.</h2>
+          </div>
+
+          <p class="section-intro">
+            Анализирую бизнес-задачи, нахожу точки роста и создаю
+            технологические решения, которые работают на результат.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-quote">
+            <p>
+              Сильный продукт начинается с правильного понимания задачи.
+            </p>
+          </div>
+
+          <div class="about-text">
+            <p>
+              Я совмещаю <span class="highlight">бизнес-анализ и сильный backend</span>,
+              чтобы видеть проект целиком: от идеи и пользовательского сценария
+              до архитектуры, API и производительности системы.
+            </p>
+
+            <p>
+              Окончиваю факультет бизнеса и развиваюсь в области распределённых
+              систем, автоматизации и прикладной разработки. Создаю
+              децентрализованные P2P-системы, инструменты для бизнеса и
+              высоконагруженные backend-решения.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="stack">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <div class="section-number">02 — STACK</div>
+            <h2>Инструменты<br />для сложных задач.</h2>
+          </div>
+
+          <p class="section-intro">
+            Подбираю технологии под задачу, а не задачу под технологии.
+          </p>
+        </div>
+
+        <div class="stack-grid">
+          <article class="stack-card">
+            <div class="stack-icon">Py</div>
+            <h3>Python</h3>
+            <p>Backend, автоматизация, AI и интеграции</p>
+          </article>
+
+          <article class="stack-card">
+            <div class="stack-icon">Go</div>
+            <h3>Go</h3>
+            <p>Высоконагруженные сервисы и микросервисы</p>
+          </article>
+
+          <article class="stack-card">
+            <div class="stack-icon">Rs</div>
+            <h3>Rust</h3>
+            <p>Безопасные и производительные системы</p>
+          </article>
+
+          <article class="stack-card">
+            <div class="stack-icon">DB</div>
+            <h3>PostgreSQL</h3>
+            <p>Надёжное хранение и обработка данных</p>
+          </article>
+
+          <article class="stack-card">
+            <div class="stack-icon">▣</div>
+            <h3>Docker</h3>
+            <p>Контейнеризация и удобный деплой</p>
+          </article>
+
+          <article class="stack-card">
+            <div class="stack-icon">⌘</div>
+            <h3>Git</h3>
+            <p>Контроль версий и командная разработка</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <div class="section-number">03 — PROJECTS</div>
+            <h2>Проекты, которыми<br />я горжусь.</h2>
+          </div>
+
+          <p class="section-intro">
+            Архитектура, backend и бизнес-логика в проектах с реальной ценностью.
+          </p>
+        </div>
+
+        <div class="projects-grid">
+          <a class="project-card" href="project-ellis.html" target="_blank" rel="noopener noreferrer">
+            <div class="project-top">
+              <span class="project-tag">P2P / Cybersecurity</span>
+              <span class="project-arrow">↗</span>
+            </div>
+
+            <div class="project-content">
+              <h3>Ellis</h3>
+              <p>
+                Децентрализованная защита веб-ресурсов от ботов и автоматизированных атак
+                на основе P2P-валидации и DAG репутаций узлов.
+              </p>
+
+              <div class="project-tech">
+                <span>Ed25519</span>
+                <span>DHP-Score</span>
+                <span>P2P</span>
+                <span>DAG</span>
+              </div>
+            </div>
+          </a>
+
+          <a class="project-card" href="project-arcada.html" target="_blank" rel="noopener noreferrer">
+            <div class="project-top">
+              <span class="project-tag">Bot / Sales</span>
+              <span class="project-arrow">↗</span>
+            </div>
+
+            <div class="project-content">
+              <h3>Аркада Опт</h3>
+              <p>
+                B2B-бот для Аркадо-Гранит в МАКС: каталог оптовых товаров,
+                приём заявок и оформление заказов для менеджеров и клиентов.
+              </p>
+
+              <div class="project-tech">
+                <span>Python</span>
+                <span>МАКС</span>
+                <span>Python</span>
+                <span>B2B</span>
+              </div>
+            </div>
+          </a>
+
+          <a class="project-card" href="project-anfivet.html" target="_blank" rel="noopener noreferrer">
+            <div class="project-top">
+              <span class="project-tag">Bot / Backend / VetTech</span>
+              <span class="project-arrow">↗</span>
+            </div>
+
+            <div class="project-content">
+              <h3>АНФИВЕТ</h3>
+              <p>
+                Python-бот ветеринарной клиники в МАКС с API-интеграцией
+                с МИС «Енот», онлайн-записью и личным кабинетом питомца.
+              </p>
+
+              <div class="project-tech">
+                <span>Python</span>
+                <span>МАКС</span>
+                <span>API</span>
+                <span>МИС «Енот»</span>
+              </div>
+            </div>
+          </a>
+
+          <a class="project-card" href="project-ezfit.html" target="_blank" rel="noopener noreferrer">
+            <div class="project-top">
+              <span class="project-tag">Mini App / HealthTech</span>
+              <span class="project-arrow">↗</span>
+            </div>
+
+            <div class="project-content">
+              <h3>EzFit</h3>
+              <p>
+                Mini App для планирования питания, контроля калорий,
+                баланса БЖУ и отслеживания прогресса.
+              </p>
+
+              <div class="project-tech">
+                <span>Mini App</span>
+                <span>Nutrition</span>
+                <span>Dashboard</span>
+                <span>HealthTech</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <div class="section-number">04 — SERVICES</div>
+            <h2>Услуги и цены.</h2>
+          </div>
+
+          <p class="section-intro">
+            Фиксированная стоимость и ориентировочный срок. Финальная оценка зависит от объёма задачи.
+          </p>
+        </div>
+
+        <div class="services-grid">
+          <article class="service-card">
+            <h3>Интеллектуальные чат-боты на Python с базой данных и деплоем</h3>
+            <div class="service-meta"><span class="service-price">от 19 500 ₽</span><span class="service-time">от 5 дней</span></div>
+          </article>
+          <article class="service-card">
+            <h3>Корпоративные чат-боты для мессенджера МАКС под ключ</h3>
+            <div class="service-meta"><span class="service-price">от 45 000 ₽</span><span class="service-time">от 7 дней</span></div>
+          </article>
+          <article class="service-card">
+            <h3>Разработка backend-систем и API</h3>
+            <div class="service-meta"><span class="service-price">от 15 000 ₽</span><span class="service-time">от 4 дней</span></div>
+          </article>
+          <article class="service-card">
+            <h3>Интеграция сторонних API, баз данных и CRM</h3>
+            <div class="service-meta"><span class="service-price">от 10 000 ₽</span><span class="service-time">от 3 дней</span></div>
+          </article>
+          <article class="service-card">
+            <h3>Mini Apps и автоматизация бизнеса</h3>
+            <div class="service-meta"><span class="service-price">от 25 000 ₽</span><span class="service-time">от 7 дней</span></div>
+          </article>
+          <article class="service-card">
+            <h3>Комплексная автоматизация бизнес-процессов и продаж</h3>
+            <div class="service-meta"><span class="service-price">от 30 000 ₽</span><span class="service-time">от 7 дней</span></div>
+          </article>
+          <article class="service-card">
+            <h3>Высоконагруженные backend-системы и микросервисы на Go</h3>
+            <div class="service-meta"><span class="service-price">от 50 000 ₽</span><span class="service-time">от 7 дней</span></div>
+          </article>
+          <article class="service-card">
+            <h3>Настройка удалённых Linux-серверов и деплой проектов</h3>
+            <div class="service-meta"><span class="service-price">от 5 000 ₽</span><span class="service-time">от 1 дня</span></div>
+          </article>
+          <article class="service-card">
+            <h3>Асинхронные парсеры и обработка данных</h3>
+            <div class="service-meta"><span class="service-price">от 7 000 ₽</span><span class="service-time">от 2 дней</span></div>
+          </article>
+          <article class="service-card">
+            <h3>Защита высоконагруженных систем от спама и DDoS-атак</h3>
+            <div class="service-meta"><span class="service-price">от 20 000 ₽</span><span class="service-time">от 3 дней</span></div>
+          </article>
+          <article class="service-card">
+            <h3>Проектирование децентрализованных P2P-сетей</h3>
+            <div class="service-meta"><span class="service-price">от 80 000 ₽</span><span class="service-time">от 10 дней</span></div>
+          </article>
+          <article class="service-card">
+            <h3>Динамические системы рейтинга и репутации</h3>
+            <div class="service-meta"><span class="service-price">от 15 000 ₽</span><span class="service-time">от 4 дней</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacts" class="contact">
+      <div class="container">
+        <div class="contact-box">
+          <div class="section-number">05 — CONTACTS</div>
+          <h2>Есть идея или сложная задача?</h2>
+          <p>
+            Расскажите о проекте — вместе найдём архитектуру и решение,
+            которые принесут пользу вашему бизнесу.
+          </p>
+
+          <div class="contact-links">
+            <a class="primary-button" href="mailto:olesyadekhand@gmail.com" target="_blank" rel="noopener noreferrer">
+              Написать на почту <span>↗</span>
+            </a>
+
+            <a class="contact-link" href="https://github.com/olesya1510" target="_blank" rel="noopener noreferrer">
+              GitHub <span>↗</span>
+            </a>
+
+            <a class="contact-link" href="https://www.linkedin.com/in/olesya-dexhand" target="_blank" rel="noopener noreferrer">
+              LinkedIn <span>↗</span>
+            </a>
+
+            <a class="contact-link" href="https://t.me/olesyadekhand" target="_blank" rel="noopener noreferrer">
+              Telegram <span>↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© 2025 Olesya Dekhand</span>
+      <span>Designed & built with intention.</span>
+    </div>
+  </footer>
+</body>
+</html>
