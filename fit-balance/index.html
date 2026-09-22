@@ -78,6 +78,56 @@
     .placeholder p { margin: 0; color: var(--muted); }
     .toast { position: fixed; right: 24px; bottom: 24px; display: none; padding: 14px 18px; border-radius: 10px; background: var(--green); color: #10221a; font-weight: 700; }
     .toast.show { display: block; }
+    .onboarding {
+      position: fixed;
+      z-index: 20;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      background: rgba(5, 10, 16, 0.88);
+      backdrop-filter: blur(10px);
+    }
+    .onboarding.hidden { display: none; }
+    .onboarding-card {
+      display: flex;
+      width: min(100%, 620px);
+      min-height: min(720px, calc(100vh - 40px));
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid #315274;
+      border-radius: 20px;
+      background: linear-gradient(180deg, #162534, #0d171f);
+      box-shadow: 0 24px 80px rgba(0,0,0,.42);
+    }
+    .onboarding-top { padding: 18px 24px; border-bottom: 1px solid var(--line); background: #151a20; text-align: center; }
+    .onboarding-top strong { font-size: 15px; }
+    .progress-wrap { display: grid; grid-template-columns: 32px 1fr 45px; align-items: center; gap: 12px; padding: 16px 24px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 11px; font-weight: 700; }
+    .progress-bar { height: 6px; overflow: hidden; border-radius: 6px; background: #263746; }
+    .progress-bar span { display: block; width: 12.5%; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #258fe2, #73c0ff); transition: width .25s ease; }
+    .onboarding-body { display: grid; flex: 1; place-items: center; padding: 35px 24px; }
+    .onboarding-step { width: min(100%, 460px); text-align: center; }
+    .onboarding-step h2 { margin: 0 0 8px; font-size: clamp(25px, 4vw, 34px); }
+    .onboarding-step > p { margin: 0 0 24px; color: #9bb1c4; font-size: 14px; }
+    .choice-list { display: grid; gap: 10px; text-align: left; }
+    .choice { display: grid; grid-template-columns: 42px 1fr; align-items: center; gap: 12px; min-height: 68px; padding: 12px 15px; border: 1px solid rgba(255,255,255,.08); border-radius: 14px; background: #253447; transition: .2s ease; }
+    .choice:hover, .choice.selected { border-color: #3299eb; background: #203b59; box-shadow: 0 0 0 1px rgba(50,153,235,.2); }
+    .choice-icon { display: grid; width: 40px; height: 40px; place-items: center; border-radius: 11px; background: #1b2a3b; font-size: 23px; }
+    .choice strong { display: block; font-size: 15px; }
+    .choice small { display: block; margin-top: 3px; color: #94aabe; font-size: 11px; }
+    .value-box { margin: 0 auto 18px; padding: 18px; border-radius: 16px; background: #253447; color: #a9d5ff; font-size: 48px; font-weight: 800; }
+    .value-box small { color: #c0cfdd; font-size: 16px; }
+    .range-control { display: grid; grid-template-columns: 42px 1fr 42px; align-items: center; gap: 10px; }
+    .range-control button { width: 42px; height: 42px; border-radius: 11px; background: #253447; font-size: 22px; }
+    .range-control input { width: 100%; accent-color: #4ca8f2; }
+    .body-type { min-height: 300px; display: grid; place-items: center; }
+    .body-type-art { font-size: 120px; filter: drop-shadow(0 12px 18px rgba(70,161,237,.2)); }
+    .body-type h3 { margin: 6px 0; font-size: 20px; }
+    .body-type p { margin: 0; color: #9bb1c4; font-size: 13px; }
+    .onboarding-actions { display: flex; gap: 10px; padding: 18px 24px 24px; }
+    .onboarding-actions button { flex: 1; min-height: 48px; border-radius: 24px; background: #2c6fa8; font-weight: 700; }
+    .onboarding-actions button.primary { background: #3297e9; box-shadow: 0 8px 24px rgba(50,151,233,.25); }
+    .onboarding-actions button:disabled { opacity: .45; cursor: not-allowed; }
     @media (max-width: 800px) {
       :root { --sidebar: 74px; }
       .brand { justify-content: center; padding: 20px 10px; }
@@ -131,6 +181,14 @@
       </div>
     </main>
   </div>
+  <div class="onboarding" id="onboarding">
+    <div class="onboarding-card">
+      <div class="onboarding-top"><strong>ФитБаланс</strong></div>
+      <div class="progress-wrap"><span id="step-label">Шаг 1 из 8</span><div class="progress-bar"><span id="step-progress"></span></div><span id="step-percent">12%</span></div>
+      <div class="onboarding-body" id="onboarding-body"></div>
+      <div class="onboarding-actions"><button type="button" id="onboarding-back" disabled>Назад</button><button type="button" class="primary" id="onboarding-next">Далее →</button></div>
+    </div>
+  </div>
   <div class="toast" id="toast">План сохранён</div>
   <script>
     const state = { calories: 1800, protein: 120, fats: 65, carbs: 200 };
@@ -139,6 +197,42 @@
     function render() { $('calories').textContent = state.calories; $('protein').textContent = state.protein + ' г'; $('fats').textContent = state.fats + ' г'; $('carbs').textContent = state.carbs + ' г'; }
     function showToast(message) { $('toast').textContent = message; $('toast').classList.add('show'); setTimeout(() => $('toast').classList.remove('show'), 1800); }
     function selectView(key) { document.querySelectorAll('[data-view]').forEach((item) => item.classList.toggle('active', item.dataset.view === key)); $('view-title').textContent = titles[key][0]; $('view-subtitle').textContent = titles[key][1]; $('plan-view').style.display = key === 'plan' ? 'block' : 'none'; document.querySelectorAll('[data-placeholder]').forEach((item) => item.classList.toggle('show', item.dataset.placeholder === key)); }
+    const onboarding = { step: 0, answers: { gender: '', age: 30, height: 170, weight: 80, target: 64, body: 'Мезоморф', activity: '', speed: '' } };
+    const onboardingSteps = [
+      { title: 'Укажите ваш пол', subtitle: 'Это нужно для точного расчёта нормы калорий', choices: [['👨🏻', 'Мужской', 'Расчёт BMR по формуле Миффлина — Сан Жеора', 'gender'], ['👩🏻', 'Женский', 'Расчёт BMR по формуле Миффлина — Сан Жеора', 'gender']] },
+      { title: 'Сколько вам лет?', subtitle: 'Возраст помогает точнее рассчитать ваш персональный план', range: 'age', min: 13, max: 90, unit: 'лет' },
+      { title: 'Какой у вас рост?', subtitle: 'Рост используется для корректной формулы калорий и рекомендаций', range: 'height', min: 120, max: 220, unit: 'см' },
+      { title: 'Текущий вес', subtitle: 'Ваш вес на сегодня — это стартовая точка плана', range: 'weight', min: 35, max: 200, unit: 'кг' },
+      { title: 'Желаемый вес', subtitle: 'К какому весу вы стремитесь?', range: 'target', min: 35, max: 200, unit: 'кг' },
+      { title: 'Ваше телосложение', subtitle: 'Это поможет точнее рассчитать процент жира', bodyTypes: [['🏋️', 'Мезоморф', 'Атлетическое, широкие плечи, упругие мышцы'], ['🧘', 'Эндоморф', 'Крупное, склонность к полноте'], ['🏃', 'Эктоморф', 'Худощавое, узкие плечи, тонкая кость'], ['❔', 'Затрудняюсь ответить', 'Для расчётов возьмём самый популярный тип']] },
+      { title: 'Образ жизни', subtitle: 'Как часто вы тренируетесь?', choices: [['🪑', 'Сидячий', 'Офисная работа, минимум активности', 'activity'], ['🚴', 'Нерегулярный', '1–3 тренировки в неделю', 'activity'], ['🏋️', 'Активный', '4+ тренировок в неделю', 'activity']] },
+      { title: 'Скорость похудения', subtitle: 'Рекомендуем плавный темп для сохранения здоровья', choices: [['🐢', 'Плавно', '0,25 кг / нед', 'speed'], ['🐌', 'Умеренно', '0,5 кг / нед', 'speed'], ['🦎', 'Быстро', '0,75 кг / нед', 'speed'], ['🚀', 'Очень быстро', '1 кг / нед', 'speed']] }
+    ];
+    function renderOnboarding() {
+      const item = onboardingSteps[onboarding.step];
+      const answer = onboarding.answers[item.range || (item.choices && item.choices[0][3]) || 'body'];
+      let content = `<h2>${item.title}</h2><p>${item.subtitle}</p>`;
+      if (item.choices) content += `<div class="choice-list">${item.choices.map(([icon, title, description, key]) => `<button type="button" class="choice onboarding-choice ${answer === title ? 'selected' : ''}" data-key="${key}" data-value="${title}"><span class="choice-icon">${icon}</span><span><strong>${title}</strong><small>${description}</small></span></button>`).join('')}</div>`;
+      if (item.range) content += `<div class="value-box"><span id="onboarding-value">${onboarding.answers[item.range]}</span> <small>${item.unit}</small></div><div class="range-control"><button type="button" data-range-step="-1">−</button><input id="onboarding-range" type="range" min="${item.min}" max="${item.max}" value="${onboarding.answers[item.range]}" data-range="${item.range}"><button type="button" data-range-step="1">+</button></div>`;
+      if (item.bodyTypes) content += `<div class="body-type"><div class="body-type-art">${item.bodyTypes[onboarding.bodyIndex || 0][0]}</div><h3>${item.bodyTypes[onboarding.bodyIndex || 0][1]}</h3><p>${item.bodyTypes[onboarding.bodyIndex || 0][2]}</p><div class="choice-list" style="margin-top:18px;grid-template-columns:repeat(2,1fr)">${item.bodyTypes.map((body, index) => `<button type="button" class="choice onboarding-choice ${onboarding.answers.body === body[1] ? 'selected' : ''}" data-body-index="${index}" data-key="body" data-value="${body[1]}"><span class="choice-icon">${body[0]}</span><span><strong>${body[1]}</strong></span></button>`).join('')}</div></div>`;
+      $('onboarding-body').innerHTML = content;
+      const percent = Math.round(((onboarding.step + 1) / onboardingSteps.length) * 100);
+      $('step-label').textContent = `Шаг ${onboarding.step + 1} из ${onboardingSteps.length}`;
+      $('step-percent').textContent = `${percent}%`;
+      $('step-progress').style.width = `${percent}%`;
+      $('onboarding-back').disabled = onboarding.step === 0;
+      $('onboarding-next').textContent = onboarding.step === onboardingSteps.length - 1 ? 'Завершить ✓' : 'Далее →';
+    }
+    document.addEventListener('click', (event) => {
+      const choice = event.target.closest('.onboarding-choice');
+      if (choice) { onboarding.answers[choice.dataset.key] = choice.dataset.value; if (choice.dataset.bodyIndex) onboarding.bodyIndex = Number(choice.dataset.bodyIndex); renderOnboarding(); }
+      const rangeStep = event.target.closest('[data-range-step]');
+      if (rangeStep) { const range = $('onboarding-range'); range.value = Math.max(Number(range.min), Math.min(Number(range.max), Number(range.value) + Number(rangeStep.dataset.rangeStep))); range.dispatchEvent(new Event('input')); }
+      if (event.target.closest('#onboarding-back') && onboarding.step > 0) { onboarding.step -= 1; renderOnboarding(); }
+      if (event.target.closest('#onboarding-next')) { const item = onboardingSteps[onboarding.step]; const key = item.range || (item.choices && item.choices[0][3]); if (!item.bodyTypes && item.choices && !onboarding.answers[key]) return showToast('Выберите вариант'); if (onboarding.step < onboardingSteps.length - 1) { onboarding.step += 1; renderOnboarding(); } else { $('onboarding').classList.add('hidden'); showToast('План рассчитан'); } }
+    });
+    document.addEventListener('input', (event) => { if (event.target.matches('#onboarding-range')) { onboarding.answers[event.target.dataset.range] = Number(event.target.value); $('onboarding-value').textContent = event.target.value; } });
+    renderOnboarding();
     document.addEventListener('click', (event) => {
       const target = event.target.closest('button');
       if (!target) return;
